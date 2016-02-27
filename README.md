@@ -61,5 +61,41 @@
 * select `tel` protocal a: `a[href^="tel:"]`
 * `rel="nofollow"`: discourage links from being followed and indexed by SE
 * `<meta name="format-detection" content="telephone=no">` turn off number detection in iOS
-* 
 
+## 02/25/2016
+* ![JavaScript Object Layout](./assets/IMG_3612.jpg)
+
+## 02/26/2016
+* Apache Hadoop’s jobtracker, namenode, secondary namenode, datanode, and tasktracker all generate logs
+
+## 02/27/2016
+* [The Life-Cycle of a Composite Component](https://github.com/facebook/react/blob/master/src/renderers/shared/reconciler/ReactCompositeComponent.js)
+
+```
+/**
+ * ------------------ The Life-Cycle of a Composite Component ------------------
+ *
+ * - constructor: Initialization of state. The instance is now retained.
+ *   - componentWillMount
+ *   - render
+ *   - [children's constructors]
+ *     - [children's componentWillMount and render]
+ *     - [children's componentDidMount]
+ *     - componentDidMount
+ *
+ *       Update Phases:
+ *       - componentWillReceiveProps (only called if parent updated)
+ *       - shouldComponentUpdate
+ *         - componentWillUpdate
+ *           - render
+ *           - [children's constructors or receive props phases]
+ *         - componentDidUpdate
+ *
+ *     - componentWillUnmount
+ *     - [children's componentWillUnmount]
+ *   - [children destroyed]
+ * - (destroyed): The instance is now blank, released by React and ready for GC.
+ *
+ * -----------------------------------------------------------------------------
+ */
+ ```
