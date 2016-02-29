@@ -20,7 +20,7 @@
 * `Function.prototype.length`: number of args expected by the funtion, replacing `arity`
 * visuallly hidden (from [H5BP](https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css))
 
-```
+```css
 /*
  * Hide only visually, but have it available for screen readers:
  * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
@@ -71,7 +71,7 @@
 ## 02/27/2016
 * [The Life-Cycle of a Composite Component](https://github.com/facebook/react/blob/master/src/renderers/shared/reconciler/ReactCompositeComponent.js)
 
-```
+```javascript
 /**
  * ------------------ The Life-Cycle of a Composite Component ------------------
  *
@@ -98,4 +98,22 @@
  *
  * -----------------------------------------------------------------------------
  */
- ```
+```
+
+## 02/28/2016
+* same-origin policy: e.g. a web application using XMLHttpRequest could only make HTTP requests to its own domain
+* CORS (Cross-Origin Resource Sharing): works by adding new HTTP headers that allow servers to describe the set of origins that are permitted to read that information using a web browser [HTTP access control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
+* `(update-in [m [k & ks] f & args])` (Clojure): 'updates' a value in a nested associative structure, where ks is a sequence of keys and f is a function that will take the old value and any supplied args and return the new value, and returns a new nested structure. If any levels do not exist, hash-maps will be created.
+
+```clojure
+(def p {:name "James" :age 26})
+(update-in p [:age] + 10)
+```
+* `(cons x seq)` (Clojure): returns a new seq where x is the first element and seq is the rest
+`(cons [1 2] [4 5 6]) ;;=> ([1 2] 4 5 6)`
+* Inside IIFE (immediate invoking function) if you use "use strict", value of this is undefined. To pass access window inside IIFE with "use strict", you have to pass this
+* `window.onload` is fired when DOM is ready and all the contents including images, css, scripts, sub-frames, etc. finished loaded. This means everything is loaded; `document.onload` is fired when DOM (DOM tree built from markup code within the document)is ready which can be prior to images and other external content is loaded
+* `document.readyState` returns `loading` while the Document is loading, `interactive` once it is finished parsing but still loading sub-resources, and `complete` once it has loaded; the `readystatechange` event fires on the `document` object when this value changes
+* `domNode.classList.add`, `domNode.classList.remove`, `domNode.classList.toggle`, `domNode.classList.contains`
+* `document.addEventListener('DOMContentLoaded', function(){});`
+    
