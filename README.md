@@ -116,4 +116,7 @@
 * `document.readyState` returns `loading` while the Document is loading, `interactive` once it is finished parsing but still loading sub-resources, and `complete` once it has loaded; the `readystatechange` event fires on the `document` object when this value changes
 * `domNode.classList.add`, `domNode.classList.remove`, `domNode.classList.toggle`, `domNode.classList.contains`
 * `document.addEventListener('DOMContentLoaded', function(){});`
+
+## 02/29/2016
+* an `element` is one specific type of `node`
     
