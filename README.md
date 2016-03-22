@@ -1,7 +1,50 @@
 # wat i learned today
 
 ## 03/21/2016
+* [clojure]
+  * `(doc name)`, `(find-doc name)`, `(source name)`
+  * `peek`, `pop`: list like stack
+  * `asssoc`, `dissoc`: replace/append/error or remove on vector
+  * `conj`, `disj`: add or remove one or more item
+  * `get-in`, `assoc-in`: get or set the value of the nested map key
+  * `(f1 (f2 (f3 x))) == (-> x f3 f2 f1`
+* [clojure] `binding` macro gives new, thread-local values to exisitying global bindings throughout the scope's thread execution
+* [clojure] coordinates: multiple pieces of shared data
+
+`ref` | `atom` | `agents`
+--- | --- | ---
+sync, coord, STM | sync, non-coord | async, non-coord
+
 * `content: attr(data-label)`
+* pre-cache
+
+```
+function preCacheHeros(){
+    for(i = 0; i < heroArray.length; i++){
+        var url = heroArray[i],
+            img = new Image();
+
+        img.src = url;
+    };
+};
+
+window.onload = preCacheHeros();
+```
+
+* `sandbox` attr of `<iframe>` to control permission
+  * allow-forms allows form submission.
+  * allow-popups allows popups (window.open(), showModalDialog(), target=”_blank”, etc.).
+  * allow-pointer-lock allows pointer lock.
+  * allow-same-origin allows the document to maintain its origin; pages loaded from https://example.com/ will retain access to that origin’s data.
+  * allow-scripts allows JavaScript execution, and also allows features to trigger automatically
+  * allow-top-navigation allows the document to break out of the frame by navigating the top-level window.
+
+* events are great for things that can happen multiple times on the same object — keyup, touchstart etc. With those events you don't really care about what happened before you attached the listener; Promises are for async success/failure [JavaScript Promises](http://www.html5rocks.com/en/tutorials/es6/promises/)
+
+* [js] `Promise.resolve` creates a promise that resolves to whatever value you give it
+
+* [git] delete obsolete branches: `git branch --merged | xargs git branch -d` or github pr
+* [git] `grep` in all commits: `git rev-list --all | xargs git grep ${REGEX}`
 
 ## 03/16/2016
 * We can apply regular typography-related styling to the `<img>` element. These styles will be applied to the alternative text, if it is displayed, and will not affect the working image.
@@ -15,23 +58,23 @@
 * consider adding `humans.txt` to site by
   1. create `humans.txt` file
   2. add `<link rel="author" href="humans.txt" />`
-  
+
   template for `humans.txt`:
-  
+
 ```
 /* TEAM */
 Your title: Your name.
 Site: email, link to a contact form, etc.
 Twitter: your Twitter username.
 Location: City, Country.
-  
+
 [...]
-  
+
 /* THANKS */
 Name: name or url
-  
+
 [...]
-  
+
 /* SITE */
 Last update: YYYY/MM/DD
 Standards: HTML5, CSS3,..
@@ -39,7 +82,7 @@ Components: Modernizr, jQuery, etc.
 Software: Software used for the development
 ```
 
-* 
+*
 
 ## 03/07/2016
 ＊ NoSQL comes from twitter hashtag #NOSQL
@@ -189,7 +232,7 @@ max-width: 835px;
 
 ## 02/20/2016
 > "The most important thing in life will always be the people in this room. Right here, right now."
-> 
+>
 > Dominic Toretto
 
 ## 02/19/2016
