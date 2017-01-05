@@ -1,5 +1,219 @@
 # wat i learned today
 
+## 04/24/2016
+* The operand of `yield*` does not have to be a generator object, it can be any iterable
+* `next()` is asymmetric, but that can’t be helped: It always sends a value to the currently suspended yield, but returns the operand of the following yield.
+
+When using a generator as an observer, it is important to note that the only purpose of the first invocation of `next()` is to start the observer. It is only ready for input afterwards, because this first invocation advances execution to the first yield. Therefore, any input you send via the first next() is ignored:
+
+```javascript
+function* gen() {
+    // (A)
+    while (true) {
+        const input = yield; // (B)
+        console.log(input);
+    }
+}
+const obj = gen();
+obj.next('a');
+obj.next('b');
+
+// Output:
+// b
+```
+
+* `regex.source`
+* `regex.flags`
+
+## 04/20/2016
+* `::first-letter { initial-letter: 3 2; }`[Better CSS Drop Caps With “initial-letter](http://webdesign.tutsplus.com/tutorials/better-css-drop-caps-with-initial-letter--cms-26350)
+
+[CSS, animation] only animate transforms (translate, rotate, scale) and opacity, absolutely positioned elements: does not repaint
+
+FLIP stands for First, Last, Invert, Play
+
+Attribute order
+HTML attributes should come in this particular order for easier reading of code.
+
+class
+id, name
+data-*
+src, for, type, href, value
+title, alt
+role, aria-*
+
+Classes make for great reusable components, so they come first. Ids are more specific and should be used sparingly (e.g., for in-page bookmarks), so they come second.
+
+Don't include spaces after commas within rgb(), rgba(), hsl(), hsla(), or rect() values
+
+Don't prefix property values or color parameters with a leading zero (e.g., .5 instead of 0.5 and -.5px instead of -0.5px).
+
+Lowercase all hex values, e.g., `#fff`
+
+Quote attribute values in selectors, e.g., `input[type="text"]`.
+
+
+Declaration order: Positioning, Box model, Typographic, Visual, e.g.
+
+```
+.declaration-order {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+
+  /* Box-model */
+  display: block;
+  float: right;
+  width: 100px;
+  height: 100px;
+
+  /* Typography */
+  font: normal 13px "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  color: #333;
+  text-align: center;
+
+  /* Visual */
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+
+  /* Misc */
+  opacity: 1;
+}
+```
+
+========================
+
+.element { ... }
+.element-avatar { ... }
+.element-selected { ... }
+
+@media (min-width: 480px) {
+  .element { ...}
+  .element-avatar { ... }
+  .element-selected { ... }
+}
+
+========================
+
+If you want to hide content from mobile and tablet users as well as assistive tech users and keyboard only users, use the title attribute.
+
+Whenever a function is called, we must look at the immediate left side of the brackets / parentheses. If on the left side of the parentheses we can see a reference, then the value of `this` passed to the function call is exactly of which that object belongs to, otherwise it is the global object.
+
+When call `flux.addEventListener("click", marty.timeTravel)`, a reference to `marty.timeTravel` was saved as our event handler and is being invoked, but not from the owning marty object
+
+```
+!function(){}();  // => true
+~function(){}(); // => -1
++function(){}(); // => NaN
+-function(){}();  // => NaN
+```
+
+NOTE: always include semicolon, or at the beginning
+https://github.com/airbnb/javascript/issues/21#issuecomment-10203921
+
+```
+button.addEventListener('click', function(event) {
+  form.requestAutocomplete();
+  event.preventDefault();
+});
+```
+
+signs are classified into three categories:
+iconic: relate to the concept through resemblance
+symbolic: relate to the concept through convention, and
+indexical: relate to the object through causation
+
+5 Questions Every Unit Test Must Answer:
+What are you testing?
+What should it do?
+What is the actual output?
+What is the expected output?
+How can the test be reproduced?
+https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d#.h3i0qbho0
+
+```
+console.table()
+```
+
+`:empty` pseudo selector: This convenient pseudo selector will match elements with no children.
+
+<picture> requires <img> as its last child
+
+Avoiding anonymous JavaScript functions
+
+```
+(function (window, document, undefined) {
+  'use strict';
+// ...
+})(window, document);
+```
+
+`calc()`: There must be spaces surrounding the math operator
+
+Prepare svg for icon
+
+Select all
+Object -> Ungroup
+Path -> Union
+Path -> Combine
+File -> Vacuum Defs (or Clean up document)
+Save as -> Plain SVG
+
+The `:target` pseudo-class represents the unique element, if any, with an id matching the fragment identifier of the URI of the document..
+
+IndexedDB is built on a transactional database model
+
+indexDB: error events bubble. Error events are targeted at the request that generated the error, then the event bubbles to the transaction, and then finally to the database object
+
+Aria tooltip w/o js:
+
+Combined with aria-describedby:
+input:focus + [role="tooltip"] {
+	display: block;
+	position: absolute;
+	top: 100%;
+}
+
+The aria-live="assertive" attribute means that the value of the text field will be spoken whenever it changes
+
+The aria-controls attribute just confirms that each button controls the input
+
+both in node and in a browser using `this` in a function that is not called with new references the global scope
+
+[[Prototype]] is an inheritance relationship between objects, while prototype is a normal property whose value is an object. The property prototype is only special w.r.t. the new operator using its value as the prototype for instances it creates.
+
+The prototype of a subclass is the superclass
+
+In a derived class, you must call super() before you can use this
+
+you can override the result of a constructor by explicitly returning an object
+
+
+Modules are singletons. Even if a module is imported multiple times, only a single “instance” of it exists
+
+Module imports are hoisted
+
+There are only two ways to combine these styles and the order in which they appear is fixed; the default export always comes first.
+
+Combining a default import with a namespace import:
+  import theDefault, * as my_lib from 'src/my_lib';
+Combining a default import with named imports
+  import theDefault, { name1, name2 } from 'src/my_lib';
+
+`Array.from(arrayLike, mapFunc?, thisArg?)`
+
+## 04/07/2016
+* [CSS in JS](http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html)
+
+## 03/22/2016
+* a negative animation delays starts the animation immediately, as if that amount of time has already gone by
+
 ## 03/21/2016
 * [clojure]
   * `(doc name)`, `(find-doc name)`, `(source name)`
@@ -43,7 +257,7 @@ window.onload = preCacheHeros();
 
 * [js] `Promise.resolve` creates a promise that resolves to whatever value you give it
 
-* [git] delete obsolete branches: `git branch --merged | xargs git branch -d` or github pr
+    * [git] delete obsolete branches: `git branch --merged | xargs git branch -d` or github pr
 * [git] `grep` in all commits: `git rev-list --all | xargs git grep ${REGEX}`
 
 ## 03/16/2016
@@ -82,8 +296,6 @@ Components: Modernizr, jQuery, etc.
 Software: Software used for the development
 ```
 
-*
-
 ## 03/07/2016
 ＊ NoSQL comes from twitter hashtag #NOSQL
 
@@ -119,7 +331,7 @@ max-width: 835px;
 * only given inorder traversal and one other traversal can the binary tree be constructed
 
 ## 03/01/2016
-* `const { protocol, host, hostname, port, pathname, hash, search, href, target } = top.location`
+* `const { protocol, host, hostname, port, pathname, hash, search, href, target } = window.location`
 * tagged template literal (tagged template): ```tagFunction`Hello ${firstName} ${lastName}!` ``` is the same as `tagFunction(['Hello ', ' ', '!'], firstName, lastName)`, e.g. `String.raw`
 
 ## 02/29/2016
@@ -182,7 +394,7 @@ max-width: 835px;
 
 ## 02/24/2016
 * select `tel` protocal a: `a[href^="tel:"]`
-* `rel="nofollow"`: discourage links from being followed and indexed by SE
+* `rel="nofollow"`: discourage links from being followed and indexed by search engine
 * `<meta name="format-detection" content="telephone=no">` turn off number detection in iOS
 
 ##02/22/2016
